@@ -5,7 +5,7 @@
 1. Create the usual search function in your controller and have it use a
 parameter named "query".
 
-1. Add "gem 'jquery-rails' to the Gemfile.
+1. Add "gem 'jquery-rails'" to the Gemfile.
 
 1. Add "//= require jquery" to app/assets/javascripts/application.js
 after "//= require turbolinks" and before "//= require\_tree ."
