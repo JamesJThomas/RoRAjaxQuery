@@ -5,11 +5,13 @@
 1. Create the usual search function in your controller and have it use a
 parameter named "query".
 
+1. Add "gem 'jquery-rails' to the Gemfile.
+
+1. Add "//= require jquery" to app/assets/javascripts/application.js
+after "//= require turbolinks" and before "//= require\_tree ."
+
 1. Do all of the following to the ERb file you are interested in adding
 dynamic search to.
-    1. Add "gem 'jquery-rails' to the Gemfile.
-    1. Add "//= require jquery" to app/assets/javascripts/application.js
-    after "//= require turbolinks" and before "//= require_tree ."
     1. Add a form similar to this.
 
         ```
