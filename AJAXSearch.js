@@ -1,9 +1,8 @@
 $(document).ready(
   function () {
-    $("#" + QueryTag).keypress(
+    $("#" + RoRAjaxQueryTag).keydown(
       function (event) {
-        var current = $("#" + QueryTag + ":text").val();
-        var keypressed = String.fromCharCode(event.which);
+        let current = $("#" + RoRAjaxQueryTag + ":text").val();
 
         // if the key was a backspace, remove a character
         if (8 === event.keyCode) {
@@ -12,15 +11,19 @@ $(document).ready(
           current += String.fromCharCode(event.which);
         }
 
-        if (0 === current.length) {
-          return;
-        }
+        $("#" + RoRAjaxResultsId).empty();
 
-        $.getJSON(QueryURL + current, function (json) {
-          $("#" + ResultsDiv).empty();
-          for (var i = 0; i < json.length; i++) {
-            $("#" + ResultsDiv).append(json[i][Field] + "<br/>");
-          }
-        })
-    });
-});
+        if (0 === current.length) { return; }
+
+        $.getJSON(RoRAjaxQueryURL + current, function (json) {
+          json.forEach(j =>
+           $("#" + RoRAjaxResultsId).append
+             (RoRAjaxPrefix +
+             j[RoRAjaxSearchField] +
+             RoRAjaxSuffix)
+           );
+        });
+      }
+    );
+  }
+);
