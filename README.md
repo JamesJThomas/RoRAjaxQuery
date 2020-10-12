@@ -1,61 +1,84 @@
-# RoRAjaxQuery
+# AjaxQuery
 ## Usage
-1. Create a public/javascripts directory and add the AJAXSearch.js file it it.
+### In the head element
+1. You need jQuery, so something along the lines of `<script src="jquery-3.5.1.min.js"></script>`
 
-1. Create the usual search function in your controller and have it use a
-parameter named "query".
+1. Set up the variables to communicate with the script.
 
-1. Add "gem 'jquery-rails'" to the Gemfile.
+    ```
+    <script>
+    var AjaxQueryURL = "http://localhost:3000/books/search.json?query=";
+    var AjaxResultsId = "results";
+    var AjaxQueryResults = "name";
+    var AjaxQueryId = "query";
+    var AjaxPrefix = "";
+    var AjaxSuffix = "\n";
+    </script>
+    ```
 
-1. Add "//= require jquery" to app/assets/javascripts/application.js
-after "//= require turbolinks" and before "//= require\_tree ."
+    * `AjaxQueryURL` is where the query URL is; you'll have to change
+    this to reflect where it is in your application.
+    * `AjaxResultsId` is the element id where the results will be
+    placed. This can be a list, a textbox, etc.
+    * `AjaxPrefix` and `AjaxSuffix` are what are placed before and after
+    the results in the `AjaxResultsId`. The above works for a textbox,
+    for a list the `AjaxPrefix` could be "&lt;li&gt;" and the `AjaxSuffix`
+    could be "&lt;/li&gt;".
+    * `AjaxQueryResults` is the name of the field in the returned JSON to be
+    displayed.
+    * `AjaxQueryId` is the id of the element that holds the query
+    string.
 
-1. Do all of the following to the ERb file you are interested in adding
-dynamic search to.
-    1. Add a form similar to this.
+1. Include the script itself.
 
-        ```
-        <%= form_tag(search_books_url, method: "get") do %>
-            <%= label_tag(:query, "Search for:") %>
-            <%= text_field_tag(:query) %>
-            <%= submit_tag("Search") %>
-        <% end %>
-        ```
+    ```
+    <script type="text/javascript" src="AJAXQuery.js"></script>
+    ```
 
-    1. Create a div to hold the search results.
+### In the body element
 
-        ```
-        <br/><div id="results"></div>
-        ```
+1. Have an input somewhere the corresponds with `AjaxQueryTag`
 
-    1. Set up the variables to communicate to the script.
+    ```
+    <input type="text" id="query" />
+    ```
 
-        ```
-        <script>
-        var RoRAjaxQueryURL = "http://localhost:3000/books/search.json?query=";
-        var RoRAjaxResultsId = "results";
-        var RoRAjaxSearchField = "name";
-        var RoRAjaxQueryTag = "query";
-        var RoRAjaxPrefix = "";
-        var RoRAjaxSuffix = "\n";
-        </script>
-        ```
+1. Create a div to hold the query results, e.g.:
 
-        * RoRAjaxQueryURL is where the search URL is; you'll have to change this to reflect where it is in you application.
-        * RoRAjaxResultsId is the element id where the results will be
-        placed. This can be a list, a textbox, etc.
-        * RoRAjaxPrefix and RoRAjaxSuffix are what are placed before and after
-        the results in the RoRAjaxResultsId. The above works for a textbox,
-        for a list the RoRAjaxPrefix could be "&lt;li&gt;" and the RoRAjaxSuffix
-        could be "&lt;/li&gt;".
-        * RoRAjaxSearchField is the result field to display.
-        * RoRAjaxQueryTag is the id of the element that holds the search
-        string.
-
-    1. Include the script itself.
-
-        ```
-        <script type="text/javascript" src="/javascripts/AJAXSearch.js"></script>
-        ```
+    ```
+    <div id="results"></div>
+    ```
 
 1. Enjoy.
+
+## Rails Usage
+
+1. In the `public/javascripts` directory add the AJAXQuery.js file.
+
+1. Include the script itself.
+
+    ```
+    <script type="text/javascript" src="/javascripts/AJAXQuery.js"></script>
+    ```
+
+1. Add `gem 'jquery-rails'` to the Gemfile.
+
+1. Add `//= require jquery` to `app/assets/javascripts/application.js`
+after `//= require turbolinks` and before `//= require\_tree .`
+
+1. Set up the variables to communicate as above.
+
+1. Add a form similar to this.
+
+    ```
+    <%= form_tag(search_books_url, method: "get") do %>
+        <%= label_tag(:query, "Search for:") %>
+        <%= text_field_tag(:query) %>
+        <%= submit_tag("Search") %>
+    <% end %>
+    ```
+
+1. Create a div to hold the query results as above.
+
+1. Enjoy.
+
