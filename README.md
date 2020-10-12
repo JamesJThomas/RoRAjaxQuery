@@ -1,6 +1,10 @@
 # AjaxQuery
 ## Usage
+
+See also AjaxQuery.html
+
 ### In the head element
+
 1. You need jQuery, so something along the lines of `<script src="jquery-3.5.1.min.js"></script>`
 
 1. Set up the variables to communicate with the script.
