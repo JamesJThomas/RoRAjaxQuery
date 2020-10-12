@@ -1,0 +1,63 @@
+<h1 id="ajaxquery">AjaxQuery</h1>
+<h2 id="usage">Usage</h2>
+<h3 id="intheheadelement">In the head element</h3>
+<p>See also AjaxQuery.html</p>
+<ol>
+<li><p>You need jQuery, so something along the lines of <code>&lt;script src="jquery-3.5.1.min.js"&gt;&lt;/script&gt;</code></p></li>
+<li><p>Set up the variables to communicate with the script.</p>
+<pre><code>&lt;script&gt;
+var AjaxQueryURL = "http://localhost:3000/books/search.json?query=";
+var AjaxResultsId = "results";
+var AjaxQueryResults = "name";
+var AjaxQueryId = "query";
+var AjaxPrefix = "";
+var AjaxSuffix = "\n";
+&lt;/script&gt;
+</code></pre>
+<ul>
+<li><code>AjaxQueryURL</code> is where the query URL is; you'll have to change
+this to reflect where it is in your application.</li>
+<li><code>AjaxResultsId</code> is the element id where the results will be
+placed. This can be a list, a textbox, etc.</li>
+<li><code>AjaxPrefix</code> and <code>AjaxSuffix</code> are what are placed before and after
+the results in the <code>AjaxResultsId</code>. The above works for a textbox,
+for a list the <code>AjaxPrefix</code> could be "&lt;li&gt;" and the <code>AjaxSuffix</code>
+could be "&lt;/li&gt;".</li>
+<li><code>AjaxQueryResults</code> is the name of the field in the returned JSON to be
+displayed.</li>
+<li><code>AjaxQueryId</code> is the id of the element that holds the query
+string.</li></ul></li>
+<li><p>Include the script itself.</p>
+<pre><code>&lt;script type="text/javascript" src="AJAXQuery.js"&gt;&lt;/script&gt;
+</code></pre></li>
+</ol>
+<h3 id="inthebodyelement">In the body element</h3>
+<ol>
+<li><p>Have an input somewhere the corresponds with <code>AjaxQueryTag</code></p>
+<pre><code>&lt;input type="text" id="query" /&gt;
+</code></pre></li>
+<li><p>Create a div to hold the query results, e.g.:</p>
+<pre><code>&lt;div id="results"&gt;&lt;/div&gt;
+</code></pre></li>
+<li><p>Enjoy.</p></li>
+</ol>
+<h2 id="railsusage">Rails Usage</h2>
+<ol>
+<li><p>In the <code>public/javascripts</code> directory add the AJAXQuery.js file.</p></li>
+<li><p>Include the script itself.</p>
+<pre><code>&lt;script type="text/javascript" src="/javascripts/AJAXQuery.js"&gt;&lt;/script&gt;
+</code></pre></li>
+<li><p>Add <code>gem 'jquery-rails'</code> to the Gemfile.</p></li>
+<li><p>Add <code>//= require jquery</code> to <code>app/assets/javascripts/application.js</code>
+after <code>//= require turbolinks</code> and before <code>//= require\_tree .</code></p></li>
+<li><p>Set up the variables to communicate as above.</p></li>
+<li><p>Add a form similar to this.</p>
+<pre><code>&lt;%= form_tag(search_books_url, method: "get") do %&gt;
+    &lt;%= label_tag(:query, "Search for:") %&gt;
+    &lt;%= text_field_tag(:query) %&gt;
+    &lt;%= submit_tag("Search") %&gt;
+&lt;% end %&gt;
+</code></pre></li>
+<li><p>Create a div to hold the query results as above.</p></li>
+<li><p>Enjoy.</p></li>
+</ol>
